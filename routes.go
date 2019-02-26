@@ -6,8 +6,8 @@ import (
 	"github.com/hugoluchessi/api_boilerplate/config"
 	"github.com/hugoluchessi/api_boilerplate/controllers"
 	"github.com/hugoluchessi/badger"
-	"github.com/hugoluchessi/gotoolkit/logging"
-	"github.com/hugoluchessi/gotoolkit/tctx"
+	"github.com/hugoluchessi/gobservable/logging"
+	"github.com/hugoluchessi/gobservable/tctx"
 )
 
 func ConfigureRoutes(st *config.ServerTools) *badger.Mux {

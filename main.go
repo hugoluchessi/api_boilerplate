@@ -5,11 +5,11 @@ import (
 	"os"
 
 	"github.com/hugoluchessi/api_boilerplate/config"
-	"github.com/hugoluchessi/gotoolkit/logging"
+	"github.com/hugoluchessi/gobservable/logging"
 )
 
 func main() {
-	cfg := logging.LoggerConfig{os.Stdout}
+	cfg := logging.LoggerConfig{Output: os.Stdout}
 	cfgs := []logging.LoggerConfig{cfg}
 
 	zap := logging.NewZapLogger(cfgs)

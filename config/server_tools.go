@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/hugoluchessi/gotoolkit/logging"
+	"github.com/hugoluchessi/gobservable/logging"
 )
 
 type ServerTools struct {
