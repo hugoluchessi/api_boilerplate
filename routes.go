@@ -7,6 +7,7 @@ import (
 	"github.com/hugoluchessi/api_boilerplate/controllers"
 	"github.com/hugoluchessi/badger"
 	"github.com/hugoluchessi/gobservable/logging"
+	"github.com/hugoluchessi/gobservable/metrics"
 	"github.com/hugoluchessi/gobservable/tctx"
 )
 
@@ -18,10 +19,15 @@ func ConfigureRoutes(st *config.ServerTools) *badger.Mux {
 	transMw := tctx.NewTransactionContextMiddleware()
 	logMw := logging.NewContextLoggerMiddleware(st.Logger)
 
+	reqCountMw := metrics.NewRequestCountMiddleware(st.MetricService)
+	reqTimeMw := metrics.NewRequestTimeMiddleware(st.MetricService)
+
 	// Create new router group
 	mainRouter := mux.AddRouter("/")
 	mainRouter.Use(logMw.Handler)
 	mainRouter.Use(transMw.Handler)
+	mainRouter.Use(reqCountMw.Handler)
+	mainRouter.Use(reqTimeMw.Handler)
 
 	mainRouter.Get("", http.HandlerFunc(healthCheckHandler))
 	mainRouter.Get("status", http.HandlerFunc(statusHandler))

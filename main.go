@@ -2,20 +2,16 @@ package main
 
 import (
 	"net/http"
-	"os"
 
 	"github.com/hugoluchessi/api_boilerplate/config"
-	"github.com/hugoluchessi/gobservable/logging"
 )
 
 func main() {
-	cfg := logging.LoggerConfig{Output: os.Stdout}
-	cfgs := []logging.LoggerConfig{cfg}
+	st, err := config.NewServerTools()
 
-	zap := logging.NewZapLogger(cfgs)
-	l := logging.NewContextLogger(zap)
-
-	st := config.NewServerTools(l)
+	if err != nil {
+		panic(err)
+	}
 
 	mux := ConfigureRoutes(st)
 
